@@ -17,19 +17,19 @@ public class PatientDetailService {
         this.patientDetailDao = patientDetailDao;
     }
 
-    public int addPatientDetail(PatientDetails patientDetails){
+    public int addPatientDetail(PatientDetails patientDetails) {
         return patientDetailDao.insert(patientDetails);
     }
 
-    public int updatePatientDetail(PatientDetails patientDetails){
-        return patientDetailDao.updateById(patientDetails.getPatientNumberId(),patientDetails);
+    public int updatePatientDetail(PatientDetails patientDetails) {
+        return patientDetailDao.updateById(patientDetails.getPatientNumberId(), patientDetails);
     }
 
-    public int deletePatientDetail(int patientNumberId){
+    public int deletePatientDetail(int patientNumberId) {
         return patientDetailDao.deleteById(patientNumberId);
     }
 
-    public List<PatientDetails> getPatientDetailsList(){
+    public List<PatientDetails> getPatientDetailsList() {
         return patientDetailDao.getPatientDetails();
     }
 }

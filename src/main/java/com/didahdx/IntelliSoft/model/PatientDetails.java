@@ -1,27 +1,28 @@
 package com.didahdx.IntelliSoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.lang.NonNull;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class PatientDetails {
-    private final int patientNumberId;
-    @NonNull
+    @NotNull(message = "{patient_number.notnull}")
+    private final Integer patientNumberId;
+    @NotNull(message = "{first_name.notnull}")
     private final String firstName;
-    @NonNull
+    @NotNull(message = "{last_name.notnull}")
     private final String lastName;
-    @NonNull
+    @NotNull(message = "{gender.notnull}")
     private final String gender;
-    @NonNull
+    @NotNull(message = "{registration_date.notnull}")
     private final Date registrationDate;
-    @NonNull
+    @NotNull(message = "{date_of_birth.notnull}")
     private final Date dateOfBirth;
 
-    public PatientDetails(@JsonProperty("patient_number") int patientNumberId, @NonNull @JsonProperty("first_name") String firstName,
-                          @NonNull @JsonProperty("last_name") String lastName, @NonNull @JsonProperty("gender") String gender,
-                          @NonNull @JsonProperty("registration_date") Date registrationDate,
-                          @NonNull @JsonProperty("date_of_birth") Date dateOfBirth) {
+    public PatientDetails(@JsonProperty("patient_number") Integer patientNumberId, @JsonProperty("first_name") String firstName,
+                          @JsonProperty("last_name") String lastName, @JsonProperty("gender") String gender,
+                          @JsonProperty("registration_date") Date registrationDate,
+                          @JsonProperty("date_of_birth") Date dateOfBirth) {
         this.patientNumberId = patientNumberId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,31 +31,32 @@ public class PatientDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getPatientNumberId() {
+
+    public Integer getPatientNumberId() {
         return patientNumberId;
     }
 
-    @NonNull
+
     public String getFirstName() {
         return firstName;
     }
 
-    @NonNull
+
     public String getLastName() {
         return lastName;
     }
 
-    @NonNull
+
     public String getGender() {
         return gender;
     }
 
-    @NonNull
+
     public Date getRegistrationDate() {
         return registrationDate;
     }
 
-    @NonNull
+
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
