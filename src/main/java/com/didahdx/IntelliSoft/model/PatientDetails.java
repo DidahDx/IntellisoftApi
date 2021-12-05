@@ -2,17 +2,25 @@ package com.didahdx.IntelliSoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class PatientDetails {
     @NotNull(message = "{patient_number.notnull}")
+    @Min(value = 0)
     private final Integer patientNumberId;
+
+    @NotBlank(message = "{first_name.notnull}")
     @NotNull(message = "{first_name.notnull}")
     private final String firstName;
+
+    @NotBlank(message = "{last_name.notnull}")
     @NotNull(message = "{last_name.notnull}")
     private final String lastName;
     @NotNull(message = "{gender.notnull}")
+    @NotBlank(message = "{gender.notnull}")
     private final String gender;
     @NotNull(message = "{registration_date.notnull}")
     private final Date registrationDate;
