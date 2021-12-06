@@ -1,15 +1,10 @@
 package com.didahdx.IntelliSoft.dao;
 
 import com.didahdx.IntelliSoft.model.VisitFormA;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public interface VisitFormADao extends JpaRepository<VisitFormA,Long> {
 
-public interface VisitFormADao {
-    int insert(VisitFormA visitFormA);
-
-    int updateById(int patientNumber, VisitFormA visitFormA);
-
-    int deleteById(int patientNumber, VisitFormA visitFormA);
-
-    List<VisitFormA> getVisitFormA();
 }
