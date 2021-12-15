@@ -2,30 +2,57 @@ package com.didahdx.IntelliSoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@Table(name="patient_details")
+@Entity(name="PatientDetails")
 public class PatientDetails {
     @NotNull(message = "{patient_number.notnull}")
     @Min(value = 0)
-    private final Integer patientNumberId;
+    @Id
+    @Column(name = "patient_number_id", nullable = false)
+    @SequenceGenerator(
+            name = "patient_details_sequence",
+            sequenceName = "patient_details_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "patient_details_sequence"
+    )
+    private Integer patientNumberId;
 
     @NotBlank(message = "{first_name.notnull}")
     @NotNull(message = "{first_name.notnull}")
-    private final String firstName;
+    @Column(name = "first_name", nullable = false)
+    private  String firstName;
 
     @NotBlank(message = "{last_name.notnull}")
     @NotNull(message = "{last_name.notnull}")
-    private final String lastName;
+    @Column(name="last_name", nullable = false)
+    private  String lastName;
     @NotNull(message = "{gender.notnull}")
     @NotBlank(message = "{gender.notnull}")
-    private final String gender;
+    @Column(name = "gender", nullable = false)
+    private  String gender;
     @NotNull(message = "{registration_date.notnull}")
-    private final Date registrationDate;
+    @Column(name="registration_date", nullable = false )
+    private  Date registrationDate;
     @NotNull(message = "{date_of_birth.notnull}")
-    private final Date dateOfBirth;
+    @Column(name = "date_of_birth",nullable = false)
+    private  Date dateOfBirth;
+
+    @Transient //used to make variable not included in the table
+    private Integer age;
 
     public PatientDetails(@JsonProperty("patient_number") Integer patientNumberId, @JsonProperty("first_name") String firstName,
                           @JsonProperty("last_name") String lastName, @JsonProperty("gender") String gender,
@@ -39,6 +66,29 @@ public class PatientDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public void setPatientNumberId(Integer patientNumberId) {
+        this.patientNumberId = patientNumberId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public Integer getPatientNumberId() {
         return patientNumberId;
@@ -67,5 +117,15 @@ public class PatientDetails {
 
     public Date getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public Integer getAge() {
+        return Period.between(this.dateOfBirth.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate(), LocalDate.now()).getYears();
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
