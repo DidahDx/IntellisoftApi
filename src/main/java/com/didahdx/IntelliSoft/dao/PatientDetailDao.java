@@ -1,17 +1,14 @@
 package com.didahdx.IntelliSoft.dao;
 
 import com.didahdx.IntelliSoft.model.PatientDetails;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface PatientDetailDao {
+@Repository
+public interface PatientDetailDao extends JpaRepository<PatientDetails,Long> {
 
-    int insert(PatientDetails patientDetails);
 
-    int updateById(int patientNumber, PatientDetails patientDetails);
-
-    int deleteById(int patientNumber);
-
-    List<PatientDetails> getPatientDetails();
 
 }

@@ -16,8 +16,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name="patient_details")
 @Entity(name="PatientDetails")
 public class PatientDetails {
-    @NotNull(message = "{patient_number.notnull}")
-    @Min(value = 0)
+//    @NotNull(message = "{patient_number.notnull}")
+//    @Min(value = 0)
     @Id
     @Column(name = "patient_number_id", nullable = false)
     @SequenceGenerator(
@@ -29,7 +29,7 @@ public class PatientDetails {
             strategy = SEQUENCE,
             generator = "patient_details_sequence"
     )
-    private Integer patientNumberId;
+    private Long patientNumberId;
 
     @NotBlank(message = "{first_name.notnull}")
     @NotNull(message = "{first_name.notnull}")
@@ -54,11 +54,12 @@ public class PatientDetails {
     @Transient //used to make variable not included in the table
     private Integer age;
 
-    public PatientDetails(@JsonProperty("patient_number") Integer patientNumberId, @JsonProperty("first_name") String firstName,
+    public PatientDetails(){}
+
+    public PatientDetails(@JsonProperty("first_name") String firstName,
                           @JsonProperty("last_name") String lastName, @JsonProperty("gender") String gender,
                           @JsonProperty("registration_date") Date registrationDate,
                           @JsonProperty("date_of_birth") Date dateOfBirth) {
-        this.patientNumberId = patientNumberId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -66,7 +67,7 @@ public class PatientDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void setPatientNumberId(Integer patientNumberId) {
+    public void setPatientNumberId(Long patientNumberId) {
         this.patientNumberId = patientNumberId;
     }
 
@@ -90,7 +91,7 @@ public class PatientDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getPatientNumberId() {
+    public Long getPatientNumberId() {
         return patientNumberId;
     }
 

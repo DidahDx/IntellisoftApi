@@ -23,7 +23,7 @@ public class PatientDetailController {
     }
 
     @PostMapping
-    public int addPatientDetail(@Valid @NonNull @RequestBody PatientDetails patientDetails)  throws EntityNotFoundException {
+    public PatientDetails addPatientDetail(@Valid @NonNull @RequestBody PatientDetails patientDetails)  throws EntityNotFoundException {
        return patientDetailService.addPatientDetail(patientDetails);
     }
 

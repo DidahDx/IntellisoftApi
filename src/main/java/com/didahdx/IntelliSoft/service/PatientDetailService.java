@@ -13,23 +13,23 @@ public class PatientDetailService {
     private final PatientDetailDao patientDetailDao;
 
     @Autowired
-    public PatientDetailService(@Qualifier("postgres") PatientDetailDao patientDetailDao) {
+    public PatientDetailService(PatientDetailDao patientDetailDao) {
         this.patientDetailDao = patientDetailDao;
     }
 
-    public int addPatientDetail(PatientDetails patientDetails) {
-        return patientDetailDao.insert(patientDetails);
+    public PatientDetails addPatientDetail(PatientDetails patientDetails) {
+        return patientDetailDao.save(patientDetails);
     }
 
-    public int updatePatientDetail(PatientDetails patientDetails) {
-        return patientDetailDao.updateById(patientDetails.getPatientNumberId(), patientDetails);
+    public PatientDetails updatePatientDetail(PatientDetails patientDetails) {
+        return patientDetailDao.saveAndFlush(patientDetails);
     }
 
-    public int deletePatientDetail(int patientNumberId) {
-        return patientDetailDao.deleteById(patientNumberId);
+    public void deletePatientDetail(Long patientNumberId) {
+        patientDetailDao.deleteById(patientNumberId);
     }
 
     public List<PatientDetails> getPatientDetailsList() {
-        return patientDetailDao.getPatientDetails();
+        return patientDetailDao.findAll();
     }
 }
