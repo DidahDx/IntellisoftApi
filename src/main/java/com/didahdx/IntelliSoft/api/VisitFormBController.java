@@ -1,10 +1,13 @@
 package com.didahdx.IntelliSoft.api;
 
+import com.didahdx.IntelliSoft.model.VisitFormB;
 import com.didahdx.IntelliSoft.service.VisitFormBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Validated
@@ -17,5 +20,14 @@ public class VisitFormBController {
         this.visitFormBService = visitFormBService;
     }
 
+    @PostMapping
+    public VisitFormB addVisitFormBDetails(@Valid @RequestBody VisitFormB visitFormB){
+        return visitFormBService.addVisitFromADetails(visitFormB);
+    }
+
+    @GetMapping
+    public List<VisitFormB> getAllVisitFormBDetails(){
+        return visitFormBService.getAllVisitFormADetails();
+    }
 
 }

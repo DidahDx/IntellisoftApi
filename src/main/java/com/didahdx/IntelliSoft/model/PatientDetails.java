@@ -3,7 +3,6 @@ package com.didahdx.IntelliSoft.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -13,13 +12,16 @@ import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Table(name="patient_details")
+@Table(name="patient_details",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "patient_number_id_unique", columnNames = "patient_number_id")
+        })
 @Entity(name="PatientDetails")
 public class PatientDetails {
 //    @NotNull(message = "{patient_number.notnull}")
 //    @Min(value = 0)
     @Id
-    @Column(name = "patient_number_id", nullable = false)
+    @Column(name = "id", nullable = false)
     @SequenceGenerator(
             name = "patient_details_sequence",
             sequenceName = "patient_details_sequence",
@@ -29,7 +31,11 @@ public class PatientDetails {
             strategy = SEQUENCE,
             generator = "patient_details_sequence"
     )
-    private Long patientNumberId;
+    private Long id;
+
+    @NotNull
+    @Column(name = "patient_number_id", nullable = false)
+    private  Integer patientNumberId;
 
     @NotBlank(message = "{first_name.notnull}")
     @NotNull(message = "{first_name.notnull}")
@@ -56,10 +62,11 @@ public class PatientDetails {
 
     public PatientDetails(){}
 
-    public PatientDetails(@JsonProperty("first_name") String firstName,
+    public PatientDetails(@JsonProperty("patient_number") Integer patientNumberId, @JsonProperty("first_name") String firstName,
                           @JsonProperty("last_name") String lastName, @JsonProperty("gender") String gender,
                           @JsonProperty("registration_date") Date registrationDate,
                           @JsonProperty("date_of_birth") Date dateOfBirth) {
+        this.patientNumberId = patientNumberId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -67,7 +74,7 @@ public class PatientDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void setPatientNumberId(Long patientNumberId) {
+    public void setPatientNumberId(Integer patientNumberId) {
         this.patientNumberId = patientNumberId;
     }
 
@@ -91,7 +98,7 @@ public class PatientDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Long getPatientNumberId() {
+    public Integer getPatientNumberId() {
         return patientNumberId;
     }
 
@@ -128,5 +135,13 @@ public class PatientDetails {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

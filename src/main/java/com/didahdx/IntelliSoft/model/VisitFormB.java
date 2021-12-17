@@ -9,11 +9,7 @@ import java.util.Date;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "VisitFormB")
-@Table(name = "visit_form_b",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "patient_number_id_unique", columnNames = "patient_number_id")
-        }
-)
+@Table(name = "visit_form_b")
 public class VisitFormB {
     @Id
     @Column(name = "id", nullable = false)
@@ -30,22 +26,22 @@ public class VisitFormB {
 
     @NotNull
     @Column(name = "patient_number_id", nullable = false)
-    private final int patientNumberId;
+    private  Integer patientNumberId;
     @NotNull
     @Column(name = "patient_name", nullable = false)
-    private final String patientName;
+    private  String patientName;
     @NotNull
     @Column(name = "visit_date", nullable = false)
-    private final Date visitDate;
+    private  Date visitDate;
     @NotNull
     @Column(name = "general_health", nullable = false)
-    private final String generalHealth;
+    private String generalHealth;
     @NotNull
     @Column(name = "is_on_any_drugs", nullable = false)
-    private final boolean isOnAnyDrugs;
+    private boolean isOnAnyDrugs;
     @NotNull
     @Column(name = "comments", nullable = false)
-    private final String comments;
+    private String comments;
 
     public Long getId() {
         return id;
@@ -55,7 +51,10 @@ public class VisitFormB {
         this.id = id;
     }
 
-    public VisitFormB(@JsonProperty("patient_number") int patientNumber, @JsonProperty("patient_name") String patientName,
+    public VisitFormB() {
+    }
+
+    public VisitFormB(@JsonProperty("patient_number") Integer patientNumber, @JsonProperty("patient_name") String patientName,
                       @JsonProperty("visit_date") Date visitDate,
                       @JsonProperty("general_health") String generalHealth,
                       @JsonProperty("is_on_any_drug") boolean isOnAnyDrugs, @JsonProperty("comments") String comments) {
@@ -67,7 +66,7 @@ public class VisitFormB {
         this.comments = comments;
     }
 
-    public int getPatientNumberId() {
+    public Integer getPatientNumberId() {
         return patientNumberId;
     }
 

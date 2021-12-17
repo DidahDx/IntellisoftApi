@@ -32,4 +32,18 @@ public class PatientDetailController {
         return patientDetailService.getPatientDetailsList();
     }
 
+    @DeleteMapping(path = "{patientNumber}")
+    public void deletePatient(@PathVariable("patientNumber") Integer patientId){
+        patientDetailService.deletePatientDetail(patientId);
+    }
+
+    @PutMapping(path = "{patientNumber}")
+    public void updatePatientDetails(
+            @PathVariable("patientNumber") Integer patientId,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String gender
+    ){
+        patientDetailService.updatePatientDetail(patientId,firstName,lastName,gender);
+    }
 }
