@@ -4,6 +4,10 @@
 
 - https://www.youtube.com/watch?v=fwPR-PCY0h8
 
+### Database app's
+- https://eggerapps.at/postico/
+- https://www.pgadmin.org/download/
+
 ### Postgres commands
 
 - create database
