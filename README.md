@@ -22,6 +22,6 @@
 ```
 
 ## Swagger ui
-[http://localhost:8080/swagger-ui](http://localhost:8080/swagger-ui)
+[http://localhost:8080/swagger-ui](https://localhost:8080/swagger-ui/)
 
 
