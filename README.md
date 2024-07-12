@@ -21,3 +21,7 @@
 \c <database_name>
 ```
 
+## Swagger ui
+`http://localhost:8080/swagger-ui`
+
+
